@@ -84,7 +84,7 @@ public class Synthesizer {
 			// Open the audio file
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(PlayClip.class.getResourceAsStream("res/c-note.wav"));
 			float audioInputStreamStart = (float) 0.2;
-			float audioInputStreamPlaylength = (float) 0.005;
+			float audioInputStreamPlaylength = (float) 0.0005;
 			
 			// Get the audio format
             AudioFormat format = audioInputStream.getFormat();

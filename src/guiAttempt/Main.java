@@ -2,9 +2,10 @@ package guiAttempt;
 
 public class Main {
 
+	private static Synthesizer synthesizer;
 	public static void main(String[] args) {
 		
-		new Synthesizer();
+		synthesizer = Synthesizer.getTheInstance(); //new Synthesizer();
 		
 		
 	}

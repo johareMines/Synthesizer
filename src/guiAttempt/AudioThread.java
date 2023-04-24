@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class AudioThread extends Thread{
 	
-	static final int BUFFER_SIZE = 512; // How many samples each buffer contains
+	static final int BUFFER_SIZE = 128; // How many samples each buffer contains: Smaller = more responsive to changes
 	static final int BUFFER_COUNT = 8; // How many buffers are in the queue
 	
 	private final Supplier<short[]> bufferSupplier;
@@ -27,6 +27,7 @@ public class AudioThread extends Thread{
 	private boolean running;
 	
 	AudioThread(Supplier<short[]> bufferSupplier) {
+		System.out.println("DIUSDKSDKUDF");
 		this.bufferSupplier = bufferSupplier;
 		alcMakeContextCurrent(context); // Set context
 		AL.createCapabilities(ALC.createCapabilities(device)); // So open AL knows what's possible
@@ -74,12 +75,19 @@ public class AudioThread extends Thread{
 			catchInternalException();
 				
 		}
-		
+		System.out.println("CLOSE");
 		//Clean memory
 		alDeleteSources(source); 
 		alDeleteBuffers(buffers);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
+	}
+	
+	public void setAudioData(Supplier<short[]> bufferSupplier) {
+	    for (int i = 0; i < BUFFER_COUNT; i++) {
+	        short[] samples = bufferSupplier.get();
+	        bufferSamples(samples);
+	    }
 	}
 	
 	synchronized void triggerPlayback() {
@@ -108,5 +116,7 @@ public class AudioThread extends Thread{
 			throw new OpenALException(error);
 		}
 	}
+
+
 
 }

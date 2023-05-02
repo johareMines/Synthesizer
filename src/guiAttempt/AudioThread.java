@@ -45,6 +45,10 @@ public class AudioThread extends Thread{
 		
 	}
 	
+	public void setVolume(float vol) {
+		alSourcef(source, AL_GAIN, vol);
+	}
+	
 	boolean isRunning() {
 		return running;
 	}

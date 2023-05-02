@@ -172,5 +172,9 @@ public class Synthesizer {
 	public void setPanelFrequency(int frequency, int panelNum) {
 		threadFrequencies[panelNum] = frequency;
 	}
+	
+	public void setThreadVol(float vol, int panelNum) {
+		audioThreads[panelNum].setVolume(vol);
+	}
 
 }
